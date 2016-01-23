@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="000100"
+    android:versionName="0.1.0"
     package="guilledelacruz.masterapp">
 
     <application
@@ -15,6 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CrearSala"
+            android:label="@string/textocrearsala" />
+        <activity
+            android:name=".BuscarSala"
+            android:label="@string/textobuscarsala"></activity>
     </application>
 
 </manifest>

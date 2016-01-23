@@ -9,8 +9,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="guilledelacruz.masterapp.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_centerInParent="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/botoncrearsala"
+            android:text="@string/textocrearsala"
+            android:padding="40dp"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/botonbuscarsala"
+            android:layout_below="@id/botoncrearsala"
+            android:text="@string/textobuscarsala"
+            android:padding="40dp"
+            android:layout_margin="20dp"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>
