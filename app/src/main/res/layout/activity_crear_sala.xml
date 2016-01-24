@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:stretchColumns="1">
     <TableRow
-        android:layout_margin="10dp">
+        android:layout_margin="8dp">
 
         <RelativeLayout
             android:layout_height="wrap_content"
@@ -37,8 +37,31 @@
 
     </TableRow>
 
+        <TableRow
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textomaster"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editmaster"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentRight="true"/>
+
+        </TableRow>
+
     <TableRow
-        android:layout_margin="10dp">
+        android:layout_margin="8dp">
 
         <RelativeLayout
             android:layout_height="wrap_content"
@@ -61,7 +84,7 @@
     </TableRow>
 
     <TableRow
-        android:layout_margin="10dp">
+        android:layout_margin="8dp">
 
         <RelativeLayout
             android:layout_height="wrap_content"
@@ -84,7 +107,7 @@
     </TableRow>
 
     <TableRow
-        android:layout_margin="10dp">
+        android:layout_margin="8dp">
 
         <RelativeLayout
             android:layout_height="wrap_content"

@@ -6,7 +6,9 @@
     <string name="textomaster">Master</string>
     <string name="textojugadores">Players</string>
     <string name="textopassword">Password</string>
+    <string name="textoprivacidad">Privacity</string>
     <string name="textoanonimo">Anonymous</string>
+    <string name="textopublico">Public</string>
     <string name="textocapacidad">Capacity</string>
     <string name="textobuscar">Search</string>
     <string name="textobuscarip">Search by IP</string>

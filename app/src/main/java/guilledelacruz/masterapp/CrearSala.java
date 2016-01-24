@@ -16,6 +16,7 @@ public class CrearSala extends AppCompatActivity {
         setContentView(R.layout.activity_crear_sala);
 
         final EditText editnombre = (EditText) findViewById(R.id.editsala);
+        final EditText editmaster = (EditText) findViewById(R.id.editmaster);
         final EditText editpass = (EditText) findViewById(R.id.editpass);
         final EditText editcap = (EditText) findViewById(R.id.editcapacidad);
         final CheckBox checkan = (CheckBox) findViewById(R.id.checkanonimo);
@@ -24,6 +25,7 @@ public class CrearSala extends AppCompatActivity {
         botoncrear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String sala = editnombre.getText().toString();
+                String master = editmaster.getText().toString();
                 String pass = editpass.getText().toString();
                 String cap = editcap.getText().toString();
                 Boolean anon = checkan.isChecked();
@@ -37,10 +39,12 @@ public class CrearSala extends AppCompatActivity {
 
                 Intent intent = new Intent(CrearSala.this, Sala.class);
                 intent.putExtra("sala", sala);
+                intent.putExtra("master", master);
                 intent.putExtra("pass", pass);
                 intent.putExtra("cap", cap);
                 intent.putExtra("anon", anon);
 
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
