@@ -8,13 +8,12 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final Button crearsala = (Button) findViewById(R.id.botoncrearsala);
-        final Button buscarsala = (Button) findViewById(R.id.botoncrearsala);
+        final Button buscarsala = (Button) findViewById(R.id.botonbuscarsala);
 
         crearsala.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

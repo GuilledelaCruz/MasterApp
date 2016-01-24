@@ -1,6 +1,7 @@
 package guilledelacruz.masterapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,13 @@ public class CrearSala extends AppCompatActivity {
                 String pass = editpass.getText().toString();
                 String cap = editcap.getText().toString();
                 Boolean anon = checkan.isChecked();
+
+                try {
+                    Integer capacidad = Integer.parseInt(cap);
+                }catch (Exception e){
+                    editcap.setTextColor(Color.RED);
+                    return;
+                }
 
                 Intent intent = new Intent(CrearSala.this, Sala.class);
                 intent.putExtra("sala", sala);
