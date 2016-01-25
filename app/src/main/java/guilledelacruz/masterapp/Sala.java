@@ -1,6 +1,7 @@
 package guilledelacruz.masterapp;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -22,9 +23,12 @@ public class Sala extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sala);
 
+        // get views
         final TextView viewmaster = (TextView) findViewById(R.id.textosalamaster);
         final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
+        final TextView viewjugadores = (TextView) findViewById(R.id.textosalajugadores);
 
+        // get values sended in previous screen
         Intent intent = getIntent();
         sala = intent.getStringExtra("sala");
         master = intent.getStringExtra("master");
@@ -32,15 +36,18 @@ public class Sala extends AppCompatActivity {
         cap = Integer.parseInt(intent.getStringExtra("cap"));
         anon = intent.getBooleanExtra("anon", false);
 
+        // put info on screen
         setTitle(jugadores.size() + "/" + cap + " - " + sala);
-        viewmaster.setText("Master: " + master);
+        viewmaster.setText(getResources().getString(R.string.textomaster) +": " + master);
 
         if (anon)
             viewanonimo.setText(getResources().getString(R.string.textoprivacidad) + ": "
                     + getResources().getString(R.string.textoanonimo));
         else
             viewanonimo.setText(getResources().getString(R.string.textoprivacidad) + ": "
-                    +  getResources().getString(R.string.textopublico));
+                    + getResources().getString(R.string.textopublico));
+
+        viewjugadores.setText(getResources().getString(R.string.textojugadores) + ":\n\n");
 
     }
 

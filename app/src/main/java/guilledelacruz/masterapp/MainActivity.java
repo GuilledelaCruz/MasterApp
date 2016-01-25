@@ -12,9 +12,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // get views
         final Button crearsala = (Button) findViewById(R.id.botoncrearsala);
         final Button buscarsala = (Button) findViewById(R.id.botonbuscarsala);
 
+        // click event, start CreateRoom activity
         crearsala.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CrearSala.class);
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // click event, start SearchRoom activity
         buscarsala.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BuscarSala.class);

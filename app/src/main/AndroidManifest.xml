@@ -26,6 +26,9 @@
         <activity
             android:name=".Sala"
             android:label="@string/textosala" />
+        <activity
+            android:name=".Votacion"
+            android:label="@string/textovotacion"></activity>
     </application>
 
 </manifest>
