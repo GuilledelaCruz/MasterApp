@@ -5,6 +5,7 @@
     <string name="textosala">Sala</string>
     <string name="textovotacion">Votación</string>
     <string name="textomaster">Master</string>
+    <string name="textonombre">Nombre</string>
     <string name="textojugadores">Jugadores</string>
     <string name="textopassword">Contraseña</string>
     <string name="textoprivacidad">Privacidad</string>
@@ -13,4 +14,5 @@
     <string name="textocapacidad">Capacidad</string>
     <string name="textobuscar">Buscar</string>
     <string name="textobuscarip">Buscar por IP</string>
+    <string name="textobuscarlargo">Busqueda automática</string>
 </resources>
