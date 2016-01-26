@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,8 @@ import java.util.List;
 public class Sala extends AppCompatActivity {
 
     private String sala = "";
-    private String master = "";
+    private String rol = "";
+    private String nombre = "";
     private String pass = "";
     private Integer cap = 0;
     private Boolean anon = false;
@@ -27,32 +31,32 @@ public class Sala extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sala);
 
-        jugadores.add("Jugador1");
-        jugadores.add("Jugador2");
-        jugadores.add("Jugador3");
-        jugadores.add("Jugador4");
-        jugadores.add("Jugador1");
-        jugadores.add("Jugador2");
-        jugadores.add("Jugador3");
-        jugadores.add("Jugador4");
+        addTestPlayers();
 
         // get views
         final TextView viewmaster = (TextView) findViewById(R.id.textosalamaster);
         final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
+        final TextView viewvotado = (TextView) findViewById(R.id.textvota);
         final Button botonvotacion = (Button) findViewById(R.id.botonsalavotacion);
         final ListView listjugadores = (ListView) findViewById(R.id.listsalajugadores);
 
         // get values sended in previous screen
         Intent intent = getIntent();
         sala = intent.getStringExtra("sala");
-        master = intent.getStringExtra("master");
+        nombre = intent.getStringExtra("nombre");
+        rol = intent.getStringExtra("rol");
         pass = intent.getStringExtra("pass");
         cap = Integer.parseInt(intent.getStringExtra("cap"));
         anon = intent.getBooleanExtra("anon", false);
 
         // put info on screen
         setTitle(jugadores.size() + "/" + cap + " - " + sala);
-        viewmaster.setText(getResources().getString(R.string.textomaster) +": " + master);
+        if(rol.equals("master")) {
+            viewmaster.setText(getResources().getString(R.string.textomaster) + ": " + nombre);
+        }else{
+            viewmaster.setText(getResources().getString(R.string.textonombre) + ": " + nombre);
+        }
+        viewvotado.setText(getResources().getString(R.string.textovotado) + ": ");
 
         if (anon)
             viewanonimo.setText(getResources().getString(R.string.textoprivacidad) + ": "
@@ -66,24 +70,27 @@ public class Sala extends AppCompatActivity {
 
         listjugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < parent.getCount(); i++) {
-                    View v = parent.getChildAt(i);
-                    TextView t = (TextView) v.findViewById(R.id.adaptertext);
-                    if (t.getCurrentTextColor() == Color.RED && i != position) {
-                        t.setTextColor(Color.DKGRAY);
-                    }
-                }
-
-                View v = parent.getChildAt(position);
-                TextView t = (TextView) v.findViewById(R.id.adaptertext);
-                t.setTextColor(Color.RED);
+                TextView texto = (TextView) view.findViewById(R.id.adaptertext);
+                viewvotado.setText(getResources().getString(R.string.textovotado) + ": " + texto.getText());
             }
         });
 
         botonvotacion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
             }
         });
+    }
+
+    private void addTestPlayers(){
+        jugadores.add("Jugador1");
+        jugadores.add("Jugador2");
+        jugadores.add("Jugador3");
+        jugadores.add("Jugador4");
+        jugadores.add("Jugador1");
+        jugadores.add("Jugador2");
+        jugadores.add("Jugador3");
+        jugadores.add("Jugador4");
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {

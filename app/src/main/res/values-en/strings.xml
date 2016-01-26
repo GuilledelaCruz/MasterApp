@@ -4,6 +4,7 @@
     <string name="textobuscarsala">Search room</string>
     <string name="textosala">Room</string>
     <string name="textovotacion">Votation</string>
+    <string name="textovotado">Votado</string>
     <string name="textomaster">Master</string>
     <string name="textonombre">Name</string>
     <string name="textojugadores">Players</string>
@@ -14,4 +15,5 @@
     <string name="textocapacidad">Capacity</string>
     <string name="textobuscar">Search</string>
     <string name="textobuscarip">Search by IP</string>
+    <string name="textobuscarlargo">Automatic search</string>
 </resources>

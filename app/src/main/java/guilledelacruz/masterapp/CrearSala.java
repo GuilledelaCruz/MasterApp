@@ -44,7 +44,8 @@ public class CrearSala extends AppCompatActivity {
                 // send values to room and start activity
                 Intent intent = new Intent(CrearSala.this, Sala.class);
                 intent.putExtra("sala", sala);
-                intent.putExtra("master", master);
+                intent.putExtra("rol", "master");
+                intent.putExtra("nombre", master);
                 intent.putExtra("pass", pass);
                 intent.putExtra("cap", cap);
                 intent.putExtra("anon", anon);
