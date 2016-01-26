@@ -1,12 +1,14 @@
 package guilledelacruz.masterapp;
 
 import android.content.Intent;
-import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,11 +27,20 @@ public class Sala extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sala);
 
+        jugadores.add("Jugador1");
+        jugadores.add("Jugador2");
+        jugadores.add("Jugador3");
+        jugadores.add("Jugador4");
+        jugadores.add("Jugador1");
+        jugadores.add("Jugador2");
+        jugadores.add("Jugador3");
+        jugadores.add("Jugador4");
+
         // get views
         final TextView viewmaster = (TextView) findViewById(R.id.textosalamaster);
         final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
-        final TextView viewjugadores = (TextView) findViewById(R.id.textosalajugadores);
         final Button botonvotacion = (Button) findViewById(R.id.botonsalavotacion);
+        final ListView listjugadores = (ListView) findViewById(R.id.listsalajugadores);
 
         // get values sended in previous screen
         Intent intent = getIntent();
@@ -50,12 +61,27 @@ public class Sala extends AppCompatActivity {
             viewanonimo.setText(getResources().getString(R.string.textoprivacidad) + ": "
                     + getResources().getString(R.string.textopublico));
 
-        viewjugadores.setText(getResources().getString(R.string.textojugadores) + ":\n\n");
+        JugadorAdapter adapter = new JugadorAdapter(this, jugadores.toArray(new String[jugadores.size()]));
+        listjugadores.setAdapter(adapter);
+
+        listjugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                for (int i = 0; i < parent.getCount(); i++) {
+                    View v = parent.getChildAt(i);
+                    TextView t = (TextView) v.findViewById(R.id.adaptertext);
+                    if (t.getCurrentTextColor() == Color.RED && i != position) {
+                        t.setTextColor(Color.DKGRAY);
+                    }
+                }
+
+                View v = parent.getChildAt(position);
+                TextView t = (TextView) v.findViewById(R.id.adaptertext);
+                t.setTextColor(Color.RED);
+            }
+        });
 
         botonvotacion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
             }
         });
     }
