@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class Sala extends AppCompatActivity {
         final TextView viewmaster = (TextView) findViewById(R.id.textosalamaster);
         final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
         final TextView viewjugadores = (TextView) findViewById(R.id.textosalajugadores);
+        final Button botonvotacion = (Button) findViewById(R.id.botonsalavotacion);
 
         // get values sended in previous screen
         Intent intent = getIntent();
@@ -49,6 +52,12 @@ public class Sala extends AppCompatActivity {
 
         viewjugadores.setText(getResources().getString(R.string.textojugadores) + ":\n\n");
 
+        botonvotacion.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+            }
+        });
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
