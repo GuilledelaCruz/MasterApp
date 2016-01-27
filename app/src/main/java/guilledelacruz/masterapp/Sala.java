@@ -36,7 +36,7 @@ public class Sala extends AppCompatActivity {
         // get views
         final TextView viewmaster = (TextView) findViewById(R.id.textosalamaster);
         final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
-        final TextView viewvotado = (TextView) findViewById(R.id.textvota);
+        final TextView viewvotado = (TextView) findViewById(R.id.textosalavotado);
         final Button botonvotacion = (Button) findViewById(R.id.botonsalavotacion);
         final ListView listjugadores = (ListView) findViewById(R.id.listsalajugadores);
 
@@ -51,19 +51,12 @@ public class Sala extends AppCompatActivity {
 
         // put info on screen
         setTitle(jugadores.size() + "/" + cap + " - " + sala);
-        if(rol.equals("master")) {
-            viewmaster.setText(getResources().getString(R.string.textomaster) + ": " + nombre);
-        }else{
-            viewmaster.setText(getResources().getString(R.string.textonombre) + ": " + nombre);
-        }
-        viewvotado.setText(getResources().getString(R.string.textovotado) + ": ");
+        viewmaster.setText(nombre);
 
         if (anon)
-            viewanonimo.setText(getResources().getString(R.string.textoprivacidad) + ": "
-                    + getResources().getString(R.string.textoanonimo));
+            viewanonimo.setText(getResources().getString(R.string.textoanonimo));
         else
-            viewanonimo.setText(getResources().getString(R.string.textoprivacidad) + ": "
-                    + getResources().getString(R.string.textopublico));
+            viewanonimo.setText(getResources().getString(R.string.textopublico));
 
         JugadorAdapter adapter = new JugadorAdapter(this, jugadores.toArray(new String[jugadores.size()]));
         listjugadores.setAdapter(adapter);
@@ -71,7 +64,7 @@ public class Sala extends AppCompatActivity {
         listjugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView texto = (TextView) view.findViewById(R.id.adaptertext);
-                viewvotado.setText(getResources().getString(R.string.textovotado) + ": " + texto.getText());
+                viewvotado.setText(texto.getText());
             }
         });
 
@@ -83,14 +76,16 @@ public class Sala extends AppCompatActivity {
     }
 
     private void addTestPlayers(){
-        jugadores.add("Jugador1");
-        jugadores.add("Jugador2");
-        jugadores.add("Jugador3");
-        jugadores.add("Jugador4");
-        jugadores.add("Jugador1");
-        jugadores.add("Jugador2");
-        jugadores.add("Jugador3");
-        jugadores.add("Jugador4");
+        jugadores.add("1");
+        jugadores.add("12");
+        jugadores.add("123");
+        jugadores.add("1234");
+        jugadores.add("12345");
+        jugadores.add("123456");
+        jugadores.add("1234567");
+        jugadores.add("12345678");
+        jugadores.add("123456789");
+        jugadores.add("1234567890");
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
