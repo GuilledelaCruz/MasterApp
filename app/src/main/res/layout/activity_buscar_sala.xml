@@ -26,7 +26,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editjugador"/>
+                android:id="@+id/editjugador"
+                android:maxLength="@integer/maxlengthedit"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -53,7 +54,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editip"/>
+                android:id="@+id/editip"
+                android:maxLength="@integer/maxlengthip"/>
 
             <Button
                 android:layout_width="match_parent"

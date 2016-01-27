@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editsala"
+            android:maxLength="@integer/maxlengthedit"
             android:layout_marginLeft="20dp"
             android:layout_alignParentRight="true"/>
 
@@ -64,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/editmaster"
+                android:maxLength="@integer/maxlengthedit"
                 android:layout_marginLeft="20dp"
                 android:layout_alignParentRight="true"/>
 
@@ -87,6 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editpass"
+            android:maxLength="@integer/maxlengthedit"
             android:layout_marginLeft="20dp"
             android:layout_alignParentRight="true"/>
 
@@ -110,6 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editcapacidad"
+            android:maxLength="@integer/maxcapacityedit"
             android:layout_marginLeft="20dp"
             android:layout_alignParentRight="true"/>
 

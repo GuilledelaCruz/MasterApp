@@ -36,6 +36,10 @@ public class CrearSala extends AppCompatActivity {
                 // try if text of capacity is a number, if not, exception launched and exit
                 try {
                     Integer capacidad = Integer.parseInt(cap);
+                    if(capacidad <= 0) {
+                        editcap.setTextColor(Color.RED);
+                        return;
+                    }
                 }catch (Exception e){
                     editcap.setTextColor(Color.RED);
                     return;

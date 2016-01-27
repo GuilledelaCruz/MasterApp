@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="maxlengthedit">16</integer>
+    <integer name="maxcapacityedit">2</integer>
+    <integer name="maxlengthip">15</integer>
+</resources>
