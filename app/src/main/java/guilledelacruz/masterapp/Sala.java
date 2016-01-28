@@ -1,6 +1,8 @@
 package guilledelacruz.masterapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -78,9 +80,25 @@ public class Sala extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode){
             case KeyEvent.KEYCODE_BACK:
-                finish();
+                alert();
                 return true;
             default: return false;
         }
+    }
+
+    private void alert(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.textosalaalerttitle)
+                .setMessage(R.string.textosalaalertdialog)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                }).show();
     }
 }

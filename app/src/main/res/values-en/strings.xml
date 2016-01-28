@@ -16,4 +16,6 @@
     <string name="textobuscar">Search</string>
     <string name="textobuscarip">Search by IP</string>
     <string name="textobuscarlargo">Automatic search</string>
+    <string name="textosalaalerttitle">Warning!</string>
+    <string name="textosalaalertdialog">Do you really want to go out?</string>
 </resources>

@@ -16,4 +16,6 @@
     <string name="textobuscar">Buscar</string>
     <string name="textobuscarip">Buscar por IP</string>
     <string name="textobuscarlargo">Busqueda automática</string>
+    <string name="textosalaalerttitle">¡Cuidado!</string>
+    <string name="textosalaalertdialog">¿Deseas salir realmente?</string>
 </resources>
