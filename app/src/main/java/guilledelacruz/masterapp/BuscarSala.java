@@ -1,6 +1,8 @@
 package guilledelacruz.masterapp;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +11,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
 public class BuscarSala extends AppCompatActivity {
+
+    private String ip = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +42,6 @@ public class BuscarSala extends AppCompatActivity {
         botonbusqueda.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String name = editjugador.getText().toString();
-                String ip;
 
                 if (!checkauto.isChecked()) {
                     ip = editip.getText().toString();
@@ -47,7 +51,16 @@ public class BuscarSala extends AppCompatActivity {
                     }
                 }
 
+                //startClientService();
 
+                Intent intent = new Intent(BuscarSala.this, Sala.class);
+                intent.putExtra("rol", "player");
+                intent.putExtra("nombre", name);
+                intent.putExtra("ip", ip);
+                intent.putExtra("pass", "");
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
@@ -57,5 +70,19 @@ public class BuscarSala extends AppCompatActivity {
 
     public static boolean validate(final String ip) {
         return PATTERN.matcher(ip).matches();
+    }
+
+    public void startClientService() {
+        startService(new Intent(getBaseContext(), TCPClient.class));
+        Toast.makeText(BuscarSala.this, "Client service started", Toast.LENGTH_SHORT).show();
+        Message mstToTCPClient = new Message();
+        mstToTCPClient.what = 0;
+        mstToTCPClient.obj = ip;
+        //TCPServer.handler.sendMessage(mstToTCPClient);
+    }
+
+    public void stopClientService() {
+        stopService(new Intent(getBaseContext(), TCPClient.class));
+        Toast.makeText(BuscarSala.this,"Client service stopped", Toast.LENGTH_SHORT).show();
     }
 }
