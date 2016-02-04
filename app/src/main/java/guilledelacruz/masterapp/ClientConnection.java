@@ -1,12 +1,9 @@
 package guilledelacruz.masterapp;
 
-import android.util.Log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Random;
 
 /**
  * Created by guilledelacruz on 2/02/16.
@@ -27,17 +24,14 @@ public class ClientConnection implements Runnable{
 
     public void run() {
         try{
-            Log.i("TCP", "ClientConnection");
             in = new DataInputStream(cliente.getInputStream());
             out = new DataOutputStream(cliente.getOutputStream());
             out.writeUTF("");
             String nick = in.readUTF();
-            Log.i("TCP", "User: " + nick);
             player = new Player(nick, cliente.getInetAddress().getHostAddress());
             server.messageToRoom();
             messaging();
         }catch (Exception exc){}
-        Log.i("TCP", "ClientClosed");
         close();
     }
 
@@ -45,6 +39,16 @@ public class ClientConnection implements Runnable{
         String read;
         while(cliente.isConnected()){
             read = in.readUTF();
+        }
+    }
+
+    public void sendMessage(int command){
+        switch(command){
+            case 0:
+
+                break;
+
+            default: break;
         }
     }
 

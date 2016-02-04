@@ -18,4 +18,5 @@
     <string name="textobuscarlargo">Busqueda automática</string>
     <string name="textosalaalerttitle">¡Cuidado!</string>
     <string name="textosalaalertdialog">¿Deseas salir realmente?</string>
+    <string name="textoconectar">Conectar</string>
 </resources>

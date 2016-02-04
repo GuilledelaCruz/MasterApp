@@ -1,7 +1,7 @@
 package guilledelacruz.masterapp;
 
 /**
- * Created by guilledelacruz on 2/02/16.
+ * Created by guilledelacruz
  */
 public class Player {
 

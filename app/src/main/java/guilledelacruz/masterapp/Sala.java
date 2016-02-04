@@ -19,82 +19,80 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by guilledelacruz
+ */
 public class Sala extends AppCompatActivity {
 
     private String sala = "";
-    private static String ip = "";
-    private String rol = "";
-    private static String nombre = "";
+    private String ip = "";
     private String pass = "";
+    private String rol = "";
+    private String nombre = "";
     private Integer cap = 0;
     private Boolean anon = false;
-    private List<String> jugadores = new ArrayList<String>();
+    private List<Player> jugadores = new ArrayList<>();
     public static Handler handler = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sala);
+
+        createHandler();
+
         // get views
-        final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
         final TextView viewvotado = (TextView) findViewById(R.id.textosalavotado);
         final Button botonvotacion = (Button) findViewById(R.id.botonsalavotacion);
         final ListView listjugadores = (ListView) findViewById(R.id.listsalajugadores);
 
-        // get values sended in previous screen
         Intent intent = getIntent();
-        sala = intent.getStringExtra("sala");
-        ip = intent.getStringExtra("ip");
-        nombre = intent.getStringExtra("nombre");
         rol = intent.getStringExtra("rol");
-        pass = intent.getStringExtra("pass");
-        if (rol.equals("master"))
-            cap = Integer.parseInt(intent.getStringExtra("cap"));
-        anon = intent.getBooleanExtra("anon", false);
 
-        // put info on screen
-        setTitle(jugadores.size() + "/" + cap + " - " + sala);
-        if (anon) viewanonimo.setText(getResources().getString(R.string.textoanonimo));
-        else viewanonimo.setText(getResources().getString(R.string.textopublico));
+        if (rol.equals("master")) master(intent);
 
         // prepare list of players
-        JugadorAdapter adapter = new JugadorAdapter(this, jugadores.toArray(new String[jugadores.size()]));
+        JugadorAdapter adapter = new JugadorAdapter(this, jugadores.toArray(new Player[jugadores.size()]));
         listjugadores.setAdapter(adapter);
         listjugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView texto = (TextView) view.findViewById(R.id.adaptertext);
                 TableRow row = (TableRow) findViewById(R.id.tablerowsalavotacion);
-                if(row.getVisibility() == View.VISIBLE)
+                if (row.getVisibility() == View.VISIBLE)
                     viewvotado.setText(texto.getText());
             }
         });
 
-        if (rol.equals("master")) master();
-        else player();
-
         botonvotacion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (TCPServer.handler != null) {
-                    Toast.makeText(Sala.this, "Message sent", Toast.LENGTH_SHORT).show();
-                    Message mstToTCPServer = new Message();
-                    mstToTCPServer.what = 0;
-                    TCPServer.handler.sendMessage(mstToTCPServer);
-                }
+
             }
         });
-
-        createHandler();
     }
 
-    public void master(){
+    public void master(Intent intent){
+        startMasterService();
+
+        // get values sended in previous screen
+        sala = intent.getStringExtra("sala");
+        ip = intent.getStringExtra("ip");
+        nombre = intent.getStringExtra("nombre");
+        cap = Integer.parseInt(intent.getStringExtra("cap"));
+        anon = intent.getBooleanExtra("anon", false);
+        pass = intent.getStringExtra("pass");
+
         final TextView viewmaster = (TextView) findViewById(R.id.textosalamaster);
+        final TextView viewanonimo = (TextView) findViewById(R.id.textosalaanonimo);
         final Button botonvotacion = (Button) findViewById(R.id.botonsalavotacion);
         viewmaster.setText(nombre);
         botonvotacion.setVisibility(View.VISIBLE);
-        startMasterService();
+        // put info on screen
+        setTitle(jugadores.size() + "/" + cap + " - " + sala);
+        if (anon) viewanonimo.setText(getResources().getString(R.string.textoanonimo));
+        else viewanonimo.setText(getResources().getString(R.string.textopublico));
     }
 
     public void player(){
-        startClientService();
+
     }
 
     public void createHandler(){
@@ -102,14 +100,31 @@ public class Sala extends AppCompatActivity {
             public void handleMessage(Message msg){
                 switch (msg.what){
                     case 0:
+                        Object[] info = {sala, nombre, cap, anon};
+                        break;
+                    case 1:
                         List<Player> jug = (List<Player>) msg.obj;
-                        jugadores = new ArrayList<>();
-                        for(Player p: jug){
-                            jugadores.add(p.getNickname());
-                        }
+                        jugadores = new ArrayList<>(jug);
                         final ListView listjugadores = (ListView) findViewById(R.id.listsalajugadores);
-                        JugadorAdapter adapter = new JugadorAdapter(Sala.this, jugadores.toArray(new String[jugadores.size()]));
+                        JugadorAdapter adapter = new JugadorAdapter(Sala.this, jugadores.toArray(new Player[jugadores.size()]));
                         listjugadores.setAdapter(adapter);
+                        break;
+                    case 2:
+                        Message msgPass = new Message();
+                        msgPass.what = 1;
+                        if (pass.equals("")) msgPass.obj = null;
+                        else msg.obj = pass;
+                        TCPServer.handler.sendMessage(msgPass);
+                        break;
+                    case 10:
+                        ip = (String) msg.obj;
+                        final TextView textoip = (TextView) findViewById(R.id.textosalaip);
+                        textoip.setText(ip);
+                        break;
+                    case 11:
+                        nombre = (String) msg.obj;
+                        final TextView textomaster = (TextView) findViewById(R.id.textosalamaster);
+                        textomaster.setText(nombre);
                         break;
                     default:
                         break;
@@ -157,21 +172,8 @@ public class Sala extends AppCompatActivity {
         Toast.makeText(Sala.this, "Master service stopped", Toast.LENGTH_SHORT).show();
     }
 
-    public void startClientService() {
-        startService(new Intent(getBaseContext(), TCPClient.class));
-        Toast.makeText(Sala.this, "Client service started", Toast.LENGTH_SHORT).show();
-    }
-
     public void stopClientService() {
         stopService(new Intent(getBaseContext(), TCPClient.class));
         Toast.makeText(Sala.this,"Client service stopped", Toast.LENGTH_SHORT).show();
-    }
-
-    public static String getNombre(){
-        return nombre;
-    }
-
-    public static String getIP(){
-        return ip;
     }
 }

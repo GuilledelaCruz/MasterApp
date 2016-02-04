@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+/**
+ * Created by guilledelacruz
+ */
 public class CrearSala extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {

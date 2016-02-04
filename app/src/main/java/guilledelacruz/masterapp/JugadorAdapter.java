@@ -10,11 +10,11 @@ import android.widget.TextView;
 /**
  * Created by guilledelacruz on 26/01/16.
  */
-public class JugadorAdapter extends ArrayAdapter<String> {
+public class JugadorAdapter extends ArrayAdapter<Player> {
 
-    private String[] jugadores;
+    private Player[] jugadores;
 
-    public JugadorAdapter (Context context, String[] jugadores){
+    public JugadorAdapter (Context context, Player[] jugadores){
         super(context, android.R.layout.simple_list_item_1, jugadores);
         this.jugadores = jugadores;
     }
@@ -38,7 +38,7 @@ public class JugadorAdapter extends ArrayAdapter<String> {
             vh = (ViewHolder) v.getTag();
         }
 
-        vh.title.setText(jugadores[position]);
+        vh.title.setText(jugadores[position].getNickname());
 
         return v;
     }
